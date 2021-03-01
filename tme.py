@@ -1,71 +1,5 @@
 import exemple
 
-
-class Agent:
-    def __init__(self, id, nom, souhaits):
-        self.id = int(id)
-        self.nom = nom
-        self.estLibre = True
-        self.souhaits = list(map(lambda souhait: int(souhait), souhaits))
-        self.candidatures = []
-
-    def ajouterCandidature(self, agent):
-        self.candidatures.append(agent)
-        agent.candidatures.append(self)
-
-    def compare(self, agent1, agent2):
-        return self.souhaits.index(agent1.id) < self.souhaits.index(agent2.id)
-
-    def toString(self):
-        return "id: {}, nom: {}, souhaits: {}".format(self.id, self.nom, self.souhaits)
-
-class Etudiant(Agent):
-    def __init__(self, id, nom, souhaits):
-        super().__init__(id, nom, souhaits)
-        self.speCourante = None
-
-    def affecter(self, specialite):
-        self.estLibre = False
-        self.speCourante = specialite
-
-    def liberer(self):
-        self.estLibre = True
-        self.speCourante = None
-
-    def aCandidateA(self, specialite):
-        return self in specialite.candidatures
-
-    def toString(self):
-        return super().toString() + " specialite courante: {}".format('aucune' if self.speCourante == None else self.speCourante.nom)
-
-
-class Specialite(Agent):
-    def __init__(self, id, nom, souhaits, capacite):
-        super().__init__(id, nom, souhaits)
-        self.capacite = capacite
-        self.etudiantsAffectes = []
-
-    def capaciteMaxAtteinte(self):
-        return len(self.etudiantsAffectes) >= self.capacite
-
-    def affecter(self, etudiant):
-        if not self.capaciteMaxAtteinte():
-            self.etudiantsAffectes.append(etudiant)
-            self.ajouterCandidature(etudiant)
-            etudiant.affecter(self)
-        else:
-            print("Erreur, capacite max atteinte")
-
-    def libererPlace(self):
-        etudiant = self.etudiantsAffectes.pop()
-        etudiant.liberer()
-
-    def dernierEtudiantAffecte(self):
-        return self.etudiantsAffectes[len(self.etudiantsAffectes) - 1]
-
-    def toString(self):
-        return super().toString() + " etudiants affectes: {}".format(list(map(lambda etudiant: etudiant.nom, self.etudiantsAffectes)))
-
 def formatterListe(liste):
     return list(map(
         lambda ligne: ligne \
@@ -134,11 +68,13 @@ def galeShapley(etudiants, specialites):
         speCourante = premiereSpeSansProposition(etudiantCourant, specialites)
         if not speCourante.capaciteMaxAtteinte():
             speCourante.affecter(etudiantCourant)
+            etudiantCourant.affecter(speCourante)
         else:
-            dernierEtudiantAffecte = speCourante.dernierEtudiantAffecte()
+            dernierEtudiantAffecte = speCourante.dernierPostulantAffecte()
             if speCourante.compare(etudiantCourant, dernierEtudiantAffecte):
                 speCourante.libererPlace()
                 speCourante.affecter(etudiantCourant)
+            etudiantCourant.affecter(speCourante)
             else:
                 speCourante.ajouterCandidature(etudiantCourant)
     return (etudiants, specialites)

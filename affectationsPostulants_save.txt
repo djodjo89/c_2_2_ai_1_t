@@ -1,0 +1,11 @@
+id: 0, nom: Etu0, souhaits: [5, 7, 6, 8, 3, 2, 0, 1, 4] agents affectes: [] postule courant: SAR
+id: 1, nom: Etu1, souhaits: [6, 5, 0, 4, 7, 2, 8, 3, 1] agents affectes: [] postule courant: SESI
+id: 2, nom: Etu2, souhaits: [4, 0, 7, 2, 8, 3, 1, 6, 5] agents affectes: [] postule courant: IMA
+id: 3, nom: Etu3, souhaits: [6, 5, 7, 0, 8, 4, 3, 1, 2] agents affectes: [] postule courant: ANDROIDE
+id: 4, nom: Etu4, souhaits: [1, 6, 7, 5, 0, 2, 4, 8, 3] agents affectes: [] postule courant: BIM
+id: 5, nom: Etu5, souhaits: [0, 7, 4, 2, 8, 3, 1, 6, 5] agents affectes: [] postule courant: ANDROIDE
+id: 6, nom: Etu6, souhaits: [5, 7, 6, 2, 8, 3, 0, 1, 4] agents affectes: [] postule courant: STL
+id: 7, nom: Etu7, souhaits: [7, 0, 4, 2, 8, 3, 1, 6, 5] agents affectes: [] postule courant: SFPN
+id: 8, nom: Etu8, souhaits: [5, 7, 6, 2, 8, 3, 0, 1, 4] agents affectes: [] postule courant: STL
+id: 9, nom: Etu9, souhaits: [2, 6, 5, 8, 3, 1, 4, 7, 0] agents affectes: [] postule courant: DAC
+id: 10, nom: Etu10, souhaits: [6, 4, 0, 8, 3, 1, 5, 2, 7] agents affectes: [] postule courant: RES
